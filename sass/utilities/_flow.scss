@@ -1,0 +1,6 @@
+// Using :where reduces specificity to zero 0
+// could also be written as: .flow > * + *
+// "anything that is a preceding sibling of something else"
+.flow > *:where(:not(:first-child)) {
+    margin-top: var(--flow-spacer, 1rem);
+}

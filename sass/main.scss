@@ -1,0 +1,11 @@
+@use 'base';
+@use 'components';
+@use 'layout';
+@use 'utilities';
+@use 'vendor';
+
+$clr: blue;
+
+body {
+    background-color: $clr;
+}
