@@ -6,19 +6,22 @@
     .date_item {
         box-shadow: 0 2px 3px rgb(0 0 0 / 20%);  
         background-color: map-get($map: map-get($colors, neutral), $key: light);
-        grid-template-areas: 'fullDate fullDate'
-                              'vs detailDate';
-        .date_item__full-date {
-            grid-area: fullDate;
-        }
-        .date_item__vs {
-            grid-area: vs;
-        }
-        .date_item__detail-date {
-            grid-area: detailDate;
-        }
-        .date_item__teams {
-            min-height: 3.5rem;
+
+        @include mq('medium') {
+            grid-template-areas: 'fullDate fullDate'
+                                  'vs detailDate';
+            .date_item__full-date {
+                grid-area: fullDate;
+            }
+            .date_item__vs {
+                grid-area: vs;
+            }
+            .date_item__detail-date {
+                grid-area: detailDate;
+            }
+            .date_item__teams {
+                min-height: 3.5rem;
+            }
         }
     }
 }
