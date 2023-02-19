@@ -36,13 +36,13 @@ function formatDateCellData(dateStringAndData) {
       ${ (game && homeTeam && awayTeam) 
         ? `<div class="date_item__teams | flex items-center justify-center gap-20 fw-700">
         <div class="date_item__away-team | grid text-center gap-4">
-          <img class="date_item__away-team-logo | margin-block-end-12" src="/public/nhllogos/${awayTeam}.png" height="75"/>
+          <img class="date_item__away-team-logo | margin-block-end-12" src="/nhllogos/${awayTeam}.png" height="75"/>
           <div class="date_item__away-team | fs-400">${awayTeam}</div>
           <div class="date_item__away-team | fs-200 clr-neutral-normal">${game.teams.away.leagueRecord.wins}-${game.teams.away.leagueRecord.losses}-${game.teams.away.leagueRecord.ot}</div>
         </div>
         <div class="date_item__vs | clr-neutral-normal">@</div>
         <div class="date_item__home-team | grid text-center gap-4">
-          <img class="date_item__home-team-logo | margin-block-end-12" src="/public/nhllogos/${homeTeam}.png" height="75">
+          <img class="date_item__home-team-logo | margin-block-end-12" src="/nhllogos/${homeTeam}.png" height="75">
           <div class="date_item__home-team | fs-400">${homeTeam}</div>
           <div class="date_item__away-team | fs-200 clr-neutral-normal">${game.teams.home.leagueRecord.wins}-${game.teams.home.leagueRecord.losses}-${game.teams.home.leagueRecord.ot}</div>
         </div>
