@@ -14,32 +14,43 @@ let dateData = [];
 
 // The API returns a time based on GMT/UTC - 5 hours == offset
 // See: https://momentjs.com/docs/
+
+// FULL TEAM NAMES:
+//  <div class="date_item__home-team | fs-400">${gameData.dates[0].games[0].teams.home.team.name}</div>
+//  <div class="date_item__away-team | fs-400">${gameData.dates[0].games[0].teams.away.team.name}</div>
+
+
 function formatDateCellData(dateStringAndData) {
   let formatted;
-  const gameData = dateStringAndData.dateData;
-  if (gameData.dates[0]) {
+
+  const homeTeam = dateStringAndData.homeTeam;
+  const awayTeam = dateStringAndData.awayTeam;
+  const gameItemInfo = dateStringAndData.dateData;
+  const game = gameItemInfo?.dates[0]?.games[0];
+
     formatted = `<div class="date_item | grid gap-24 padding-24">
       <div class="date_item__full-date | fs-200 margin-block-end-12">${moment(dateStringAndData.dateString).format("dddd, MMMM Do YYYY")}</div>
-      <div class="date_item__teams | flex items-center gap-20 fw-700">
+      ${ (game && homeTeam && awayTeam) 
+        ? `<div class="date_item__teams | flex items-center justify-center gap-20 fw-700">
         <div class="date_item__away-team | grid text-center gap-4">
-          <div class="date_item__away-team | fs-400">${gameData.dates[0].games[0].teams.away.team.name}</div>
-          <div class="date_item__away-team | fs-200 clr-neutral-normal">${gameData.dates[0].games[0].teams.away.leagueRecord.wins}-${gameData.dates[0].games[0].teams.away.leagueRecord.losses}-${gameData.dates[0].games[0].teams.away.leagueRecord.ot}</div>
+          <div class="date_item__away-team | fs-400">${awayTeam}</div>
+          <div class="date_item__away-team | fs-200 clr-neutral-normal">${game.teams.away.leagueRecord.wins}-${game.teams.away.leagueRecord.losses}-${game.teams.away.leagueRecord.ot}</div>
         </div>
         <div class="date_item__vs | clr-neutral-normal">@</div>
         <div class="date_item__home-team | grid text-center gap-4">
-          <div class="date_item__home-team | fs-400">${gameData.dates[0].games[0].teams.home.team.name}</div>
-          <div class="date_item__away-team | fs-200 clr-neutral-normal">${gameData.dates[0].games[0].teams.home.leagueRecord.wins}-${gameData.dates[0].games[0].teams.home.leagueRecord.losses}-${gameData.dates[0].games[0].teams.home.leagueRecord.ot}</div>
+          <div class="date_item__home-team | fs-400">${homeTeam}</div>
+          <div class="date_item__away-team | fs-200 clr-neutral-normal">${game.teams.home.leagueRecord.wins}-${game.teams.home.leagueRecord.losses}-${game.teams.home.leagueRecord.ot}</div>
         </div>
         </div>
       <div class="date_item__detail-date-and-location | grid text-center gap-6">
-        <div class="date_item__detail-date-and-location-date">${moment.utc(gameData.dates[0].games[0].gameDate).utcOffset(-5, false).format("ddd, h:mmA [ET]")}</div>
-        <div class="date_item__detail-date-and-location-loc fs-200 clr-neutral-normal">${gameData.dates[0].games[0].venue.name}</div>
-      </div>
+        <div class="date_item__detail-date-and-location-date">${moment.utc(game.gameDate).utcOffset(-5, false).format("ddd, h:mmA [ET]")}</div>
+        <div class="date_item__detail-date-and-location-loc fs-200 clr-neutral-normal">${game.venue.name}</div>
+      </div>`
+      : 
+      ``
+      }
     </div>
     `;
-  } else {
-    formatted = `<div  class="date_item | grid padding-24">${moment(dateStringAndData.dateString).format("dddd, MMMM Do YYYY")}</div>`;
-  }
   return formatted;
 }
 
@@ -107,14 +118,25 @@ function loopWeekOfDates() {
   return dates;
 }
 
+const fetchTeamAbbrev = async function(teamDataURL) {
+  const response = await fetch(teamDataURL).then((resp) => resp.json()).then(function(data) {
+    return data.teams[0].abbreviation;
+  })
+  return response;
+}
+
+export const fetchAbbrevs = async function(scheduleDataFetched) {
+  for (const dateItem of scheduleDataFetched) {
+    if (dateItem.dateData.dates.length > 0) {
+      dateItem.homeTeam = await fetchTeamAbbrev(`${statsAPIBaseURL}${dateItem.dateData.dates[0].games[0].teams.home.team.link.replace('/api/v1/', '')}`);
+      dateItem.awayTeam = await fetchTeamAbbrev(`${statsAPIBaseURL}${dateItem.dateData.dates[0].games[0].teams.away.team.link.replace('/api/v1/', '')}`);
+    }
+  }
+  return scheduleDataFetched;
+}
+
 export function createDocHTML(retrievedData) {
-  console.log(retrievedData);
   for (const dateItem of retrievedData) {
-      if (dateItem.dateData.dates.length > 0) {
-        const homeTeamLinkEndpt = `dateItem.dateData.dates[0].games[0].teams.home.team.link`;
-        const awayTeamLinkEndpt = `dateItem.dateData.dates[0].games[0].teams.away.team.link`;
-        // fetchTeamAbbrevAndLogo();
-      }
     const formattedData = formatDateCellData(dateItem);
     appendTableCellData(formattedData);
   }
