@@ -1,7 +1,7 @@
 @use "../abstracts" as *;
 
 #weekGrid {
-    grid-auto-rows: 1fr;
+    // grid-auto-rows: 1fr;
     background-color: map-get($map: map-get($colors, neutral), $key: nude);
     .date_item {
         box-shadow: 0 2px 3px rgb(0 0 0 / 20%);  
