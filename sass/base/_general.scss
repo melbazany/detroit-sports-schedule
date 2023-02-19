@@ -1,3 +1,5 @@
+@use "../abstracts" as *;
+
 *,
 *::before,
 *::after {
@@ -8,4 +10,11 @@
   margin: 0;
   padding: 0;
   font: inherit;
+}
+
+body {
+  background-color: map-get($map: map-get($colors, neutral), $key: nude);
+  min-height: 100svh;
+  min-height: 100vh;
+  grid-template-rows: min-content 1fr;
 }

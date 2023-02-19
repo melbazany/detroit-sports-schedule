@@ -1,0 +1,31 @@
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-flow: row;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-nowrap {
+    flex-wrap: nowrap;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.basis-100 {
+    flex-basis: 100%;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-grow {
+    flex-grow: 1;
+}

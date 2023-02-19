@@ -1,0 +1,15 @@
+@use "../abstracts" as *;
+:root {
+    font-family: $ff-sans;
+}
+
+.ff-serif {
+    font-family: $ff-serif;
+}
+.ff-sans {
+    font-family: $ff-sans;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}

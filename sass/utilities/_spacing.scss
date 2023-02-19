@@ -1,5 +1,16 @@
 @use "../abstracts" as *;
 
+.margin-auto {
+  margin: auto;
+}
+
+.margin-block-auto {
+  margin-block: auto;
+}
+.margin-inline-auto {
+  margin-inline: auto;
+}
+
 @each $size-name, $size-value in $sizes {
   .margin {
     &-#{$size-name} {
@@ -46,5 +57,26 @@
     &-inline-#{$size-name} {
       padding-inline: $size-value;
     }
+  }
+  .gap {
+    &-#{$size-name} {
+      gap: $size-value;
+    }
+  }
+  .row-gap {
+    &-#{$size-name} {
+      gap: $size-value;
+    }
+  }
+  .col-gap {
+    &-#{$size-name} {
+      gap: $size-value;
+    }
+  }
+}
+
+@each $width-name, $width-value in $widths {
+  .w-#{$width-name} {
+    width: $width-value;
   }
 }
