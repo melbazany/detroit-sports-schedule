@@ -26,10 +26,13 @@ function formatDateCellData(dateStringAndData) {
   const homeTeam = dateStringAndData.homeTeam;
   const awayTeam = dateStringAndData.awayTeam;
   const gameItemInfo = dateStringAndData.dateData;
+
+  console.log(dateStringAndData.dateString);
+
   const game = gameItemInfo?.dates[0]?.games[0];
 
     formatted = `<div class="date_item | grid gap-24 padding-24">
-      <div class="date_item__full-date | fs-200 margin-block-end-12">${moment(dateStringAndData.dateString).format("dddd, MMMM Do YYYY")}</div>
+      <div class="date_item__full-date | fs-200 margin-block-end-12">${moment(`${dateStringAndData.dateString}`).format("dddd, MMMM Do YYYY")}</div>
       ${ (game && homeTeam && awayTeam) 
         ? `<div class="date_item__teams | flex items-center justify-center gap-20 fw-700">
         <div class="date_item__away-team | grid text-center gap-4">
