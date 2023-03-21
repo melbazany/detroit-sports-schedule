@@ -1,6 +1,6 @@
 # Detroit Sports Schedule
 
-<a href= "[https://shielded-taiga-53121.herokuapp.com/](https://detroit-sports-calendar.netlify.app/)">Detroit Sports Schedule - Netlify app<a/>
+https://detroit-sports-calendar.netlify.app/ - ** Only looks decent on mobile... no responsive style yet
 
 <img width="400" alt="Screenshot 2023-03-12 at 9 33 10 AM" src="https://user-images.githubusercontent.com/75503142/224564433-ec12a67b-87c7-4b91-bb90-113bf1490020.png">
 
